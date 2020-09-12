@@ -1,25 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Layout, Menu } from "antd";
+import "./App.css";
+
+// constants
+const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Header id="main-header" />
+      <Layout id="site-layout">
+        <Content id="left-main-content">
+          <h1>Hello world</h1>
+        </Content>
+        <Footer style={{ textAlign: "center" }} id="footer">
+          Book Rental Store management system
+        </Footer>
+      </Layout>
+      <Sider id="sider-content" width="50%">
+        <h1>Hello Sider</h1>
+      </Sider>
+    </Layout>
   );
 }
 
