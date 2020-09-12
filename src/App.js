@@ -1,5 +1,6 @@
 import React from "react";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Row, Col } from "antd";
+import { BookCard } from "./BookCard";
 import "./App.css";
 
 // constants
@@ -11,7 +12,29 @@ function App() {
       <Header id="main-header" />
       <Layout id="site-layout">
         <Content id="left-main-content">
-          <h1>Hello world</h1>
+          <Row gutter={[10, 10]} id="left-main-row">
+            <Col xs={24} sm={24} md={12} lg={12} xl={8} xxl={8}>
+              <BookCard />
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={12} xl={8} xxl={8}>
+              <BookCard />
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={12} xl={8} xxl={8}>
+              <BookCard />
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={12} xl={8} xxl={8}>
+              <BookCard />
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={12} xl={8} xxl={8}>
+              <BookCard />
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={12} xl={8} xxl={8}>
+              <BookCard />
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={12} xl={8} xxl={8}>
+              <BookCard />
+            </Col>
+          </Row>
         </Content>
         <Footer style={{ textAlign: "center" }} id="footer">
           Book Rental Store management system
