@@ -1,24 +1,42 @@
 import React from "react";
 import { Layout, Input, Row, Col, Form, Divider } from "antd";
+import moment from "moment";
 import dataSource from "./dataSource";
 import { BookCard } from "./BookCard";
 import { RentedBooks } from "./RentedBooks";
 import "./App.css";
 import logo from "./logo.png";
-const data = dataSource(50);
-console.log({ data });
+import { useLocalStorage } from "./customHooks";
 
 // constants
 const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
+const books = dataSource(50);
 
 function App() {
   const [form] = Form.useForm();
-  const [books, setBooks] = React.useState(data);
+  const [rentedBooks, setRentendBooks] = useLocalStorage("rented-books", []);
 
   const onFinish = (values) => {
     console.log("Finish:", values);
   };
+
+  function handleRentingBooks(book) {
+    setRentendBooks((prevBooks) => {
+      if (prevBooks.some((prevbook) => prevbook.id === book.id)) {
+        return prevBooks;
+      } else {
+        book.returnDate = moment().add("days", 1).format("YYYY-MM-DD");
+        book.amount = 1;
+        return [book, ...prevBooks];
+      }
+    });
+  }
+
+  function removeOneBookFromStorage(book) {
+    setRentendBooks((prevBooks) => prevBooks.filter((bk) => bk.id !== book.id));
+  }
+
   return (
     <Layout>
       <Header id="main-header">
@@ -44,7 +62,7 @@ function App() {
           <Row gutter={[10, 10]} className="left-main-row">
             {books.map((book) => (
               <Col key={book.id} xs={24} sm={24} md={12} lg={12} xl={8} xxl={8}>
-                <BookCard book={book} />
+                <BookCard book={book} handleRentingBooks={handleRentingBooks} />
               </Col>
             ))}
           </Row>
@@ -101,7 +119,12 @@ function App() {
               <Divider orientation="left">Books</Divider>
             </Col>
             <Col span={24}>
-              <RentedBooks />
+              <RentedBooks
+                dataSource={rentedBooks}
+                clearBooksFromStorage={() => setRentendBooks([])}
+                removeOneBookFromStorage={removeOneBookFromStorage}
+                setRentendBooks={setRentendBooks}
+              />
             </Col>
           </Row>
         </Form>

@@ -1,91 +1,126 @@
+/**
+ * Rented books component
+ */
 import React from "react";
-import { Table, DatePicker, Button } from "antd";
+import { Table, DatePicker, Button, Tooltip } from "antd";
 import moment from "moment";
 
-function onChange(date, dateString) {
-  console.log(date, dateString);
-}
+export function RentedBooks({
+  dataSource,
+  clearBooksFromStorage,
+  removeOneBookFromStorage,
+  setRentendBooks,
+}) {
+  function onChange(_, dateString, node) {
+    setRentendBooks((prevBooks) =>
+      prevBooks.map((book) => {
+        if (book.id === node.id) {
+          let amount = moment(dateString)
+            .endOf("day")
+            .diff(moment().startOf("day"), "days");
+          return { ...node, returnDate: dateString, amount };
+        }
+        return book;
+      })
+    );
+  }
 
-function disabledDate(current) {
-  return current && current < moment().endOf("day");
-}
+  function disabledDate(current) {
+    return current && current < moment().endOf("day");
+  }
 
-const columns = [
-  {
-    title: "Title",
-    dataIndex: "title",
-    ellipsis: true,
-    width: "50%",
-  },
-  {
-    title: "Date",
-    key: "date",
-    dataIndex: "date",
-    render: (date) => (
-      <DatePicker
-        format="YYYY-MM-DD"
-        defaultValue={moment(moment().add(1, "days"), "YYYY-MM-DD")}
-        onChange={onChange}
-        disabledDate={disabledDate}
-      />
-    ),
-    width: 150,
-  },
-  {
-    title: "Days",
-    dataIndex: "noOfDays",
-    render: (date) => {
-      return <span>3</span>;
-    },
-  },
-  {
-    title: "Amount",
-    dataIndex: "amount",
-  },
-];
-const data = [
-  {
-    key: "1",
-    title: "Learn Python the hard way",
-    noOfDays: 32,
-    amount: "$ 10",
-  },
-  {
-    key: "2",
-    title: "Learn Java the hard way",
-    noOfDays: 42,
-    amount: "$ 10",
-  },
-  {
-    key: "3",
-    title: "Learn CSS the hard way",
-    noOfDays: 32,
-    amount: "$ 10",
-  },
-  {
-    key: "4",
-    title: "Learn JavaScript the hard way",
-    noOfDays: 99,
-    amount: "$ 10",
-  },
-];
-
-export function RentedBooks(params) {
   return (
     <Table
-      columns={columns}
-      dataSource={data}
+      columns={[
+        {
+          title: "Title",
+          dataIndex: "title",
+          ellipsis: true,
+          width: "50%",
+          render: (text, book) => (
+            <span className="table-title">
+              <Tooltip title="Remove book">
+                <Button
+                  shape="circle"
+                  type="text"
+                  ghost
+                  onClick={() => removeOneBookFromStorage(book)}
+                >
+                  x
+                </Button>
+              </Tooltip>
+              {text}
+            </span>
+          ),
+        },
+        {
+          title: "Date",
+          key: "returnDate",
+          dataIndex: "returnDate",
+          render: (_, node) => {
+            return (
+              <DatePicker
+                format="YYYY-MM-DD"
+                defaultValue={moment(moment().add(1, "days"), "YYYY-MM-DD")}
+                onChange={(date, dateString) =>
+                  onChange(date, dateString, node)
+                }
+                disabledDate={disabledDate}
+                mode="date"
+              />
+            );
+          },
+          width: 150,
+        },
+        {
+          title: "Days",
+          key: "returnDate",
+          dataIndex: "returnDate",
+          align: "right",
+          render: (date) => {
+            return (
+              <span>
+                {moment(date)
+                  .endOf("day")
+                  .diff(moment().startOf("day"), "days")}
+              </span>
+            );
+          },
+        },
+        {
+          title: "Amount",
+          key: "amount",
+          dataIndex: "amount",
+          align: "right",
+          render: (amount) => <span>$ {amount}</span>,
+        },
+      ]}
+      dataSource={dataSource}
       pagination={false}
+      rowKey="id"
+      locale={{
+        emptyText: "No books added",
+      }}
       size="small"
       footer={() => (
         <div className="rented-books-table-footer">
           <div className="rented-books-charges">
             <h3>Total</h3>
-            <h3>$ 1200</h3>
+            <h3>$ {`${dataSource.reduce((a, c) => a + c.amount, 0)}`}</h3>
           </div>
-          <Button type="danger" size="large" className="receipt-print-btn">
-            PRINT
-          </Button>
+          <div className="receipt-print-btn">
+            <Button
+              ghost
+              type="danger"
+              size="large"
+              onClick={() => clearBooksFromStorage()}
+            >
+              CLEAR
+            </Button>
+            <Button type="danger" size="large">
+              PRINT
+            </Button>
+          </div>
         </div>
       )}
     />

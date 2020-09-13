@@ -4,7 +4,6 @@ import booktitles from "./bookTitles";
 
 // Constants
 const imageCategory = ["animals", "arch", "nature", "people", "tech", "any"];
-const imageFilters = ["grayscale", "sepia"];
 const imageWidth = 220;
 const imageHeight = 280;
 

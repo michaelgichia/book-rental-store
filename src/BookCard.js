@@ -4,9 +4,8 @@
 import React from "react";
 import { Button, Tooltip } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import "./App.css";
 
-export function BookCard({ book }) {
+export function BookCard({ book, handleRentingBooks }) {
   return (
     <div id="book-card">
       <div id="action-btn">
@@ -16,6 +15,7 @@ export function BookCard({ book }) {
             icon={<PlusOutlined />}
             type="primary"
             style={{ borderWidth: 2 }}
+            onClick={() => handleRentingBooks(book)}
           />
         </Tooltip>
       </div>

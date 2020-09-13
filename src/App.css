@@ -122,9 +122,14 @@
 }
 
 .receipt-print-btn {
-  align-self: flex-end;
-  width: 150px;
+  display: flex;
+  justify-content: flex-end;
   margin-top: 10px;
+}
+
+.receipt-print-btn button {
+  width: 150px;
+  margin-left: 20px;
 }
 
 .truncate-text {
@@ -132,4 +137,12 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 220px;
+}
+
+.table-title {
+  text-transform: capitalize;
+}
+
+.clear-rented-book-btn {
+  color: #b9c6ce !important;
 }
