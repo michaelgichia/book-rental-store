@@ -18,10 +18,10 @@ const columns = [
     width: "50%",
   },
   {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (tags) => (
+    title: "Date",
+    key: "date",
+    dataIndex: "date",
+    render: (date) => (
       <DatePicker
         format="YYYY-MM-DD"
         defaultValue={moment(moment().add(1, "days"), "YYYY-MM-DD")}
