@@ -6,7 +6,7 @@ import { Button, Tooltip } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import "./App.css";
 
-export function BookCard(props) {
+export function BookCard({ book }) {
   return (
     <div id="book-card">
       <div id="action-btn">
@@ -20,10 +20,10 @@ export function BookCard(props) {
         </Tooltip>
       </div>
       <div id="book-card-image-wrapper">
-        <img src="https://placeimg.com/220/280/fashion" alt="fashion" />
+        <img src={book.imageUrl} alt={book.title} />
       </div>
-      <h3 className="title book-title">Learn python the hard way</h3>
-      <h3 className="title book-author">Michael Gichia</h3>
+      <h3 className="title book-title truncate-text">{book.title}</h3>
+      <h3 className="title book-author">{book.author}</h3>
     </div>
   );
 }

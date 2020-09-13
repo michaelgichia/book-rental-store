@@ -96,6 +96,7 @@
 .title {
   font-weight: 700;
   font-size: 14px;
+  text-transform: capitalize;
 }
 
 .book-title {
@@ -124,4 +125,11 @@
   align-self: flex-end;
   width: 150px;
   margin-top: 10px;
+}
+
+.truncate-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 220px;
 }

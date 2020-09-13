@@ -34,8 +34,7 @@ const columns = [
   {
     title: "Days",
     dataIndex: "noOfDays",
-    render: (date, node, args, argss) => {
-      console.log({ argss });
+    render: (date) => {
       return <span>3</span>;
     },
   },

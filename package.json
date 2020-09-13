@@ -7,13 +7,15 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.6.3",
+    "faker": "^5.1.0",
     "husky": "^4.3.0",
     "lint-staged": "^10.3.0",
     "moment": "^2.27.0",
     "prettier": "^2.1.1",
     "react": "^16.9.0",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "shortid": "^2.2.15"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
