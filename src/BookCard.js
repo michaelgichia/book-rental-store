@@ -4,7 +4,7 @@
 import React from "react";
 import { Button, Tooltip } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import "./book-card.css";
+import "./App.css";
 
 export function BookCard(props) {
   return (

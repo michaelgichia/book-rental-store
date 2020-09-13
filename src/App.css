@@ -12,11 +12,31 @@
 
 #main-header {
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   padding: 0;
   width: 100%;
-  background-color: #0c92f3;
+  background-color: #000000;
   color: #fff;
+  padding-left: 30px;
+  display: flex;
+  height: 64px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#main-header .placeholder-div {
+  width: 85px;
+}
+
+#main-header img {
+  height: 32px;
+  padding-right: 20px;
+}
+
+#main-header h1 {
+  color: #fff;
+  padding: 0;
+  margin: 0;
 }
 
 #left-main-content {
@@ -24,7 +44,8 @@
   overflow: scroll;
   height: 100vh;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 #sider-content {
@@ -33,6 +54,7 @@
   position: fixed;
   right: 0;
   background-color: #f8f9fa;
+  padding: 30px 20px 20px 20px;
 }
 
 #footer {
@@ -40,7 +62,66 @@
   background-color: #fff;
 }
 
-#left-main-row {
-  padding-top: 64px;
+.left-main-row {
+  margin-top: 64px;
   max-width: 730px;
+  width: 100%;
+}
+
+#book-card {
+  width: 220px;
+  position: relative;
+  overflow: hidden;
+  height: 350px;
+  margin-bottom: 30px;
+}
+
+#action-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#book-card-image-wrapper {
+  width: 100%;
+  height: 280px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.book-title {
+  color: #3b5260;
+}
+
+.book-author {
+  color: #b9c6ce;
+}
+
+.rented-books-table-footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.rented-books-charges {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rented-books-charges h3 {
+  font-weight: 700;
+}
+
+.receipt-print-btn {
+  align-self: flex-end;
+  width: 150px;
+  margin-top: 10px;
 }
