@@ -38,7 +38,7 @@ export function RentedBooks({
           ellipsis: true,
           width: "50%",
           render: (text, book) => (
-            <span className="table-title">
+            <span>
               <Tooltip title="Remove book">
                 <Button
                   shape="circle"
@@ -49,12 +49,12 @@ export function RentedBooks({
                   x
                 </Button>
               </Tooltip>
-              {text}
+              <span className="table-title">{text}</span>
             </span>
           ),
         },
         {
-          title: "Date",
+          title: "Return date",
           key: "returnDate",
           dataIndex: "returnDate",
           render: (_, node) => {
@@ -71,21 +71,6 @@ export function RentedBooks({
             );
           },
           width: 150,
-        },
-        {
-          title: "Days",
-          key: "returnDate",
-          dataIndex: "returnDate",
-          align: "right",
-          render: (date) => {
-            return (
-              <span>
-                {moment(date)
-                  .endOf("day")
-                  .diff(moment().startOf("day"), "days")}
-              </span>
-            );
-          },
         },
         {
           title: "Amount",
@@ -117,7 +102,7 @@ export function RentedBooks({
             >
               CLEAR
             </Button>
-            <Button type="danger" size="large">
+            <Button type="danger" size="large" htmlType="submit">
               PRINT
             </Button>
           </div>

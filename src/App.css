@@ -146,3 +146,31 @@
 .clear-rented-book-btn {
   color: #b9c6ce !important;
 }
+
+.empty-books-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.printme {
+  display: none !important;
+}
+
+@media print {
+  .no-printme {
+    display: none !important;
+  }
+  .printme {
+    display: block !important;
+  }
+}
+
+.print-doc-footer {
+  display: table;
+  width: 100%;
+}
+
+.print-doc-footer h3 {
+  font-weight: 700;
+}
