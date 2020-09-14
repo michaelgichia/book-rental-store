@@ -29,6 +29,8 @@ function App() {
   const printContainer = React.useRef(null);
   const iframeContainer = React.useRef(null);
 
+  console.log({ rentedBooks });
+
   React.useEffect(() => {
     if (search.length < 1) {
       setBooks(data);
@@ -52,6 +54,9 @@ function App() {
         return prevBooks;
       } else {
         book.returnDate = moment().add("days", 1).format("YYYY-MM-DD");
+        book.daysRented = moment(book.returnDate)
+          .startOf("day")
+          .diff(moment(new Date()).endOf("day"), "days");
         book.amount = priceByCategory[book.category];
         return [book, ...prevBooks];
       }

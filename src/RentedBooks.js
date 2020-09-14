@@ -29,6 +29,11 @@ export function RentedBooks({
     return current && current < moment().endOf("day");
   }
 
+  function handlePriceCalculation(book) {
+    console.log({ book });
+    return <span>wait</span>;
+  }
+
   return (
     <Table
       columns={[
