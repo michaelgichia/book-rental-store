@@ -14,6 +14,12 @@ const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 const data = dataSource(50);
 
+const priceByCategory = {
+  regular: 1.5,
+  fiction: 3,
+  novel: 1.5,
+};
+
 function App() {
   const [form] = Form.useForm();
   const [user, setUser] = React.useState({});
@@ -46,7 +52,7 @@ function App() {
         return prevBooks;
       } else {
         book.returnDate = moment().add("days", 1).format("YYYY-MM-DD");
-        book.amount = 1;
+        book.amount = priceByCategory[book.category];
         return [book, ...prevBooks];
       }
     });

@@ -4,7 +4,7 @@
 import React from "react";
 import { Table, Row, Col, Divider } from "antd";
 
-export function ReceiptDocument({ dataSource, user, display = false }) {
+export function ReceiptDocument({ dataSource, user }) {
   return (
     <Row className="printme">
       <Col span={24}>
