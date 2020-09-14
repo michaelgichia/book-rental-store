@@ -21,20 +21,6 @@ describe("<ReceiptDocument />", () => {
     email: "gichuru.gichia@gmail.com",
   };
 
-  it("should test ReceiptDocument component with default state of empty array", () => {
-    const component = shallow(
-      <ReceiptDocument dataSource={[]} user={user} display={true} />
-    );
-    expect(component).toMatchSnapshot();
-  });
-
-  it("should test ReceiptDocument component without user information", () => {
-    const component = shallow(
-      <ReceiptDocument dataSource={[]} user={{}} display={true} />
-    );
-    expect(component).toMatchSnapshot();
-  });
-
   it("should display rented books", () => {
     shallow(
       <ReceiptDocument dataSource={rentedBooks} user={user} display={true} />
