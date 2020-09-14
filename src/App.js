@@ -4,7 +4,7 @@ import moment from "moment";
 import dataSource from "./dataSource";
 import { BookCard } from "./BookCard";
 import { RentedBooks } from "./RentedBooks";
-import { PrintDocument } from "./PrintDocument";
+import { ReceiptDocument } from "./ReceiptDocument";
 import "./App.css";
 import logo from "./logo.png";
 import { useLocalStorage } from "./customHooks";
@@ -205,7 +205,7 @@ function App() {
           {renderForm()}
           {renderRentedBooks()}
           <div ref={printContainer}>
-            <PrintDocument dataSource={rentedBooks} user={user} />
+            <ReceiptDocument dataSource={rentedBooks} user={user} />
           </div>
         </Form>
       </Sider>

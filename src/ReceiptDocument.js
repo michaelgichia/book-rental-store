@@ -4,7 +4,7 @@
 import React from "react";
 import { Table, Row, Col, Divider } from "antd";
 
-export function PrintDocument({ dataSource, user }) {
+export function ReceiptDocument({ dataSource, user, display = false }) {
   return (
     <Row className="printme">
       <Col span={24}>
@@ -62,4 +62,4 @@ export function PrintDocument({ dataSource, user }) {
   );
 }
 
-export default PrintDocument;
+export default ReceiptDocument;
