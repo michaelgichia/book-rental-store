@@ -5,6 +5,54 @@ import React from "react";
 import { Table, DatePicker, Button, Tooltip } from "antd";
 import moment from "moment";
 
+export function handlePriceCalculation(book) {
+  if (book.category === "fiction") {
+    if (book.daysRented < 4) {
+      return <span>$ 4.5</span>;
+    } else {
+      let fictionExtraDays = book.daysRented - 3;
+      let fictionAmountForExtraDays = fictionExtraDays * 3;
+      let fictionTotal = 4.5 + fictionAmountForExtraDays;
+      return <span>$ {fictionTotal}</span>;
+    }
+  } else {
+    if (book.daysRented < 3) {
+      return <span>$ 2</span>;
+    } else {
+      let extraDays = book.daysRented - 2;
+      let amountForExtraDays = extraDays * 1.5;
+      let total = 2 + amountForExtraDays;
+      return <span>$ {total}</span>;
+    }
+  }
+}
+
+export function handleTotal(books) {
+  let summary = 0;
+  books.forEach((book) => {
+    if (book.category === "fiction") {
+      if (book.daysRented < 4) {
+        summary += 4.5;
+      } else {
+        let fictionExtraDays = book.daysRented - 3;
+        let fictionAmountForExtraDays = fictionExtraDays * 3;
+        let fictionTotal = 4.5 + fictionAmountForExtraDays;
+        summary += fictionTotal;
+      }
+    } else {
+      if (book.daysRented < 3) {
+        summary += 2;
+      } else {
+        let extraDays = book.daysRented - 2;
+        let amountForExtraDays = extraDays * 1.5;
+        let total = 2 + amountForExtraDays;
+        summary += total;
+      }
+    }
+  });
+  return summary;
+}
+
 export function RentedBooks({
   dataSource,
   clearBooksFromStorage,
@@ -18,7 +66,10 @@ export function RentedBooks({
           let amount = moment(dateString)
             .endOf("day")
             .diff(moment().startOf("day"), "days");
-          return { ...node, returnDate: dateString, amount };
+          let daysRented = moment(dateString)
+            .endOf("day")
+            .diff(moment().startOf("day"), "days");
+          return { ...node, returnDate: dateString, amount, daysRented };
         }
         return book;
       })
@@ -27,11 +78,6 @@ export function RentedBooks({
 
   function disabledDate(current) {
     return current && current < moment().endOf("day");
-  }
-
-  function handlePriceCalculation(book) {
-    console.log({ book });
-    return <span>wait</span>;
   }
 
   return (
@@ -82,7 +128,7 @@ export function RentedBooks({
           key: "amount",
           dataIndex: "amount",
           align: "right",
-          render: (amount) => <span>$ {amount}</span>,
+          render: (_, book) => handlePriceCalculation(book),
         },
       ]}
       dataSource={dataSource}
@@ -96,7 +142,7 @@ export function RentedBooks({
         <div className="rented-books-table-footer">
           <div className="rented-books-charges">
             <h3>Total</h3>
-            <h3>$ {`${dataSource.reduce((a, c) => a + c.amount, 0)}`}</h3>
+            <h3>$ {handleTotal(dataSource)}</h3>
           </div>
           <div className="receipt-print-btn">
             <Button

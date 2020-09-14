@@ -3,7 +3,7 @@
  */
 import React from "react";
 import { Table, Row, Col, Divider } from "antd";
-
+import { handlePriceCalculation, handleTotal } from "./RentedBooks";
 export function ReceiptDocument({ dataSource, user }) {
   return (
     <Row className="printme">
@@ -43,7 +43,7 @@ export function ReceiptDocument({ dataSource, user }) {
             key: "amount",
             dataIndex: "amount",
             align: "right",
-            render: (amount) => <span>$ {amount}</span>,
+            render: (_, book) => handlePriceCalculation(book),
           },
         ]}
         dataSource={dataSource}
@@ -52,9 +52,7 @@ export function ReceiptDocument({ dataSource, user }) {
         size="small"
         footer={() => (
           <div className="print-doc-footer">
-            <h3>
-              Total: $ {`${dataSource.reduce((a, c) => a + c.amount, 0)}`}
-            </h3>
+            <h3>Total: $ {handleTotal(dataSource)}</h3>
           </div>
         )}
       />
