@@ -6,6 +6,7 @@ import booktitles from "./bookTitles";
 const imageCategory = ["animals", "arch", "nature", "people", "tech", "any"];
 const imageWidth = 220;
 const imageHeight = 280;
+const category = ["regular", "fiction", "novel"];
 
 /**
  *
@@ -27,6 +28,7 @@ export function dataSource(itemCount) {
       imageUrl: `http://placeimg.com/${imageWidth}/${imageHeight}/${imageCategory[imageIndex]}${imagefilter}`, // Some science
       id: shortid.generate(),
       author: `${faker.name.firstName()} ${faker.name.lastName()}`,
+      category: category[Math.floor(Math.random() * 3)],
     });
 
     // Reinitialize image index
